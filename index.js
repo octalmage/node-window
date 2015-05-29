@@ -12,6 +12,22 @@ getWindows(function(windows)
 	console.log(windows);
 });
 
+function getControls(window, callback)
+{
+    var thisScript;
+    
+    if (window.number)
+    {
+        thisScript = getControlsScript.replace("{app}", window.app).replace("{window}", window.number);
+    }
+    else
+    {
+        thisScript = getControlsScript.replace("{app}", window.app).replace("{window}", "\"" + window.title + "\"");
+    }
+    
+    console.log(thisScript);
+}
+
 function getWindows(callback)
 {
 	applescript.execString(getWindowsScript, function(err, rtn)
