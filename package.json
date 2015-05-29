@@ -1,0 +1,6 @@
+{
+  "name": "window",
+  "dependencies": {
+    "applescript": "^1.0.0"
+  }
+}
