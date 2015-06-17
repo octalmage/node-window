@@ -22,6 +22,8 @@ var buttonEx = /(.*?) of window/
 getWindows(function(windows)
 {
 	console.log(windows);
+	
+});
 
 getControls({ app: 'iTerm', number: '1' }, function(controls)
 {
