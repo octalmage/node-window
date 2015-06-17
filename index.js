@@ -6,10 +6,17 @@ var getControlsScript = 'tell application "System Events" to tell process "{app}
 var titleEx = /window "(.*?)"/;
 var numberEx = /window (\d*)/;
 var appEx = /application process "(.*?)"/;
+var buttonEx = /(.*?) of window/
+
+
 
 getWindows(function(windows)
 {
 	console.log(windows);
+
+getControls({ app: 'iTerm', number: '1' }, function(controls)
+{
+	//console.log(controls);
 });
 
 function getControls(window, callback)
@@ -24,8 +31,33 @@ function getControls(window, callback)
     {
         thisScript = getControlsScript.replace("{app}", window.app).replace("{window}", "\"" + window.title + "\"");
     }
+	
+	console.log(thisScript);
     
-    console.log(thisScript);
+	applescript.execString(thisScript, function(err, rtn)
+	{
+		var controlArray = [];
+
+		for (var x in rtn)
+		{
+			var button = buttonEx.exec(rtn[x]);
+			var thisControl = {};
+			
+			//console.log(button[1])
+			
+			thisControl = window;
+			
+			thisControl.button = button[1];
+			
+			//console.log(thisControl);
+			
+			controlArray.push(thisControl);
+		}
+		
+		console.log(controlArray);
+		
+		callback(controlArray);
+	});
 }
 
 function getWindows(callback)
