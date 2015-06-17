@@ -3,6 +3,15 @@ var applescript = require("applescript");
 var getWindowsScript = 'tell application "System Events" to get window of processes whose visible is true'
 var getControlsScript = 'tell application "System Events" to tell process "{app}" to get entire contents of window {window}';
 
+//Control info.
+/*tell application "System Events"
+	tell process "Script Editor"
+		properties of button 1 of window 1
+	end tell
+end tell
+*/
+
+
 var titleEx = /window "(.*?)"/;
 var numberEx = /window (\d*)/;
 var appEx = /application process "(.*?)"/;
